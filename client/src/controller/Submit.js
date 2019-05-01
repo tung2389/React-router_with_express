@@ -7,7 +7,8 @@ async function submit(url,data)
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
-    body:data
+    body:data,
+    credentials:'include'
   }).then(res => res.text()
     .then(res => alert(res)));
 };

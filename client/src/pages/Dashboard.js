@@ -16,13 +16,17 @@ export default class Dashboard extends Component {
 
   logout() {
     fetch(LOG_OUT_URL, {
-      method: "GET"
+      method: "GET",
+      credentials:'include'
     }).then(res => res.text().then(res => alert(res)));
-    this.setState({ data: undefined });
+    this.setState({ data: false });
   }
 
   async componentDidMount() {
-    let res = await fetch(DASHBOARD_URL);
+    let res = await fetch(DASHBOARD_URL,{
+      method: "GET",
+      credentials:'include'
+    });
 
     if(res.status === 200){
         let result = await res.json();
@@ -31,6 +35,7 @@ export default class Dashboard extends Component {
 
     else{
         let result = await res.text();
+        this.setState({data: false});
         alert(result);
     }
     
@@ -41,6 +46,7 @@ export default class Dashboard extends Component {
         <Paper elevation={1} className="center_content">
           <h1 align="center">Your email: {data.email}</h1>
           <h1 align="center">Your username: {data.username}</h1>
+          <div className = "center">
           <Button
             type="submit"
             color="secondary"
@@ -49,24 +55,31 @@ export default class Dashboard extends Component {
           >
             Log out
           </Button>
+          </div>
         </Paper>
     );
   }
   
   main_component(){
-    if(this.state.data) {
-      return (
-        <div>
-        {this.render_data(this.state.data)}
+    if(this.state.data !== undefined) {
+      if(this.state.data) {
+        return (
+          <div>
+          {this.render_data(this.state.data)}
+          </div>
+        )
+      }
+      else {
+        return(
+        <div className = "center">
+          You haven't logged in yet
         </div>
-      )
+        );
+      }
     }
+    
     else {
-      return(
-      <div className = "center">
-        You haven't logged in yet
-      </div>
-      );
+      return <div></div>
     }
   }
   render() {

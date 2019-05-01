@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const session = require('express-session');
 
 const dashboard = require('./routes/dashboard');
 const login = require('./routes/login');
@@ -22,6 +23,15 @@ function connect(){
 
 //Connect to mongodb
 connect();
+
+//Express session
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
+);
 
 //Passport middleware
 app.use(passport.initialize());
