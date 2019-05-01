@@ -11,6 +11,7 @@ export default class Dashboard extends Component {
       data: undefined
     };
     this.logout = this.logout.bind(this);
+    this.main_component = this.main_component.bind(this);
   }
 
   logout() {
@@ -37,20 +38,9 @@ export default class Dashboard extends Component {
 
   render_data(data) {
     return (
-      <div className="float-up">
         <Paper elevation={1} className="center_content">
           <h1 align="center">Your email: {data.email}</h1>
           <h1 align="center">Your username: {data.username}</h1>
-        </Paper>
-      </div>
-    );
-  }
-
-  render() {
-    return (
-      <div>
-        {this.render_data(this.state.data)}
-        <div className="center">
           <Button
             type="submit"
             color="secondary"
@@ -59,7 +49,30 @@ export default class Dashboard extends Component {
           >
             Log out
           </Button>
+        </Paper>
+    );
+  }
+  
+  main_component(){
+    if(this.state.data) {
+      return (
+        <div>
+        {this.render_data(this.state.data)}
         </div>
+      )
+    }
+    else {
+      return(
+      <div className = "center">
+        You haven't logged in yet
+      </div>
+      );
+    }
+  }
+  render() {
+    return (
+      <div className = "float-up">
+      {this.main_component()}
       </div>
     );
   }

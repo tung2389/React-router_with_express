@@ -9,10 +9,10 @@ class Layout extends React.Component{
           <Link to = "/login"><Button variant = "contained">LOG IN</Button></Link>
           <br/>
           <br/>
-          <Link to = "/sign_up"><Button variant = "contained">SIGN UP</Button></Link>
+          <Link to = "/register"><Button variant = "contained">REGISTER</Button></Link>
           <br/>
           <br/>
-          <Link to = "/profile"><Button variant = "contained">PROFILE</Button></Link>
+          <Link to = "/dashboard"><Button variant = "contained">DASHBOARD</Button></Link>
         </div>
       );
     }
